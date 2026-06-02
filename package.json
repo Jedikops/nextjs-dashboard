@@ -28,6 +28,8 @@
     "@types/node": "22.10.7",
     "@types/react": "19.0.7",
     "@types/react-dom": "19.0.3",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^15.5.18",
     "typescript-plugin-css-modules": "^5.2.0"
   },
   "pnpm": {
