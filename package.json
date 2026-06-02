@@ -3,7 +3,8 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev --turbopack",
-    "start": "next start"
+    "start": "next start",
+    "lint": "esLint ."
   },
   "dependencies": {
     "@headlessui/react": "^2.2.10",
