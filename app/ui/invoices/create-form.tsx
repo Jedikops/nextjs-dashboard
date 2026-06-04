@@ -10,9 +10,15 @@ import {
 } from "@heroicons/react/24/outline";
 import { Button } from "@/app/ui/button";
 import { createInvoice, State } from "@/app/lib/actions";
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 
 export default function Form({ customers }: { customers: CustomerField[] }) {
+  const [formInitData, setFormData] = useState<{
+    customerId: string;
+    amount: number | string;
+    status: string;
+  }>({ customerId: "", amount: "", status: "pending" });
+
   const initialState: State = { message: null, errors: {} };
   const [state, formAction] = useActionState(createInvoice, initialState);
 
@@ -29,8 +35,7 @@ export default function Form({ customers }: { customers: CustomerField[] }) {
               id="customer"
               name="customerId"
               className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-              defaultValue=""
-              aria-describedby="customer-error"
+             defaultValue={""}
             >
               <option value="" disabled>
                 Select a customer
