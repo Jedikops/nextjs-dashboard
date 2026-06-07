@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import { signIn } from "@/auth";
 import { AuthError } from "next-auth";
 
-const sql = postgres(process.env.DATABASE_URL!, { ssl: "require" });
+const sql = postgres(process.env.POSTGRES_URL!, { ssl: "require" });
 
 const FormSchema = z.object({
   id: z.string(),
@@ -114,10 +114,12 @@ export async function updateInvoice(
 }
 
 export async function deleteInvoice(id: string) {
-  await sql`
-    DELETE FROM invoices
-    WHERE id = ${id}
-  `;
+  try {
+    await sql`DELETE FROM invoices WHERE id = ${id}`;
+  } catch (err) {
+    console.error("DELETE ERROR:", err);
+    throw err;
+  }
 
   revalidatePath("/dashboard/invoices");
 }
